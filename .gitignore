@@ -5,7 +5,7 @@ application/cache/*
 
 application/logs/*
 !application/logs/index.html
-
+*.geojson
 !application/*/.htaccess
 
 user_guide_src/build/*

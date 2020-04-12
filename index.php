@@ -305,10 +305,11 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
-	require_once BASEPATH . 'dotenv/autoloader.php';
-
-	$dotenv = new Dotenv\Dotenv(__DIR__);
-	$dotenv->load();
+	if (getenv("ENV") != 'prod'){
+		require_once BASEPATH . 'dotenv/autoloader.php';
+		$dotenv = new Dotenv\Dotenv(__DIR__);
+		$dotenv->load();
+	}
 
 
 /*

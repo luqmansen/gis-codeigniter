@@ -7,27 +7,32 @@ class Migration_initial_migration extends CI_Migration {
 	public function up()
 	{
 		$this->dbforge->add_field(array(
-			'blog_id' => array(
+			'area_id' => array(
 				'type' => 'INT',
 				'constraint' => 5,
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE
 			),
-			'blog_title' => array(
+			'area_name' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '100',
 			),
-			'blog_description' => array(
-				'type' => 'TEXT',
+			'area_code' => array(
+				'type' => 'INT',
+				'constraint' => 3,
 				'null' => TRUE,
 			),
+			'geojson_data' => array(
+				'type' => 'LONGTEXT',
+				'null'=> FALSE,
+			)
 		));
-		$this->dbforge->add_key('blog_id', TRUE);
-		$this->dbforge->create_table('blog');
+		$this->dbforge->add_key('area_id', TRUE);
+		$this->dbforge->create_table('area');
 	}
 
 	public function down()
 	{
-		$this->dbforge->drop_table('blog');
+		$this->dbforge->drop_table('area');
 	}
 }

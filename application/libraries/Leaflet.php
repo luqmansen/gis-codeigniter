@@ -130,47 +130,44 @@ class Leaflet
 		}
 
 		$geojson_output .= '
-		var geolayer_' . $geojson['file']['polygon'][0].';';
+		
+			function AddPolygon(data) {
+					console.log(data)
+					L.geoJson(data, {
+						style: function (feature){';
 
-		for ($ilayer = 0; $ilayer <= 3; $ilayer++) {
-			if ($ilayer == 0) {
-				if ($geojson['file']['polygon'][0] != '') {
-
-					$geojson_output .= '
-					
-					$.getJSON(base_url+"assets/geojson/' . $geojson['file']['polygon'][0] . '.geojson",function (data) {
-							geoLayer_' . $geojson['file']['polygon'][0] . ' = L.geoJson(data, {
-								style: function (feature){';
-
-					if ($geojson['customCategory'] == TRUE) {
-						$geojson_output .= '									
-									console.log(feature)
-									var ctg = feature.properties.kategori;
-									var fillColor = ' . json_encode($geojson['categories']). '
-									var cl, wg;
-									if(ctg==100){
-										cl="' . $geojson['colorOuter'] . '";
-										wg = 0.5;
-									}else{
-										cl="' . $geojson['color'] . '";
-										wg = "' . $geojson['weight'] . '"
-									}
-								';
-						$geojson_output .= '
-									return {
-										fillOpacity: ' . $geojson['fillOpacity'] . ',
-										fillColor : fillColor[ctg-1],
-										dashArray: "30 8",	
-										lineCap : "square",
-										weight : wg,
-										"color": cl,
-										"opacity": ' . $geojson['opacity'] . '
-									}
+						if ($geojson['customCategory'] == TRUE) {
+							$geojson_output .= '									
+										var ctg = feature.properties.kategori;
+										var fillColor = ' . json_encode($geojson['categories']). '
+										var cl, wg;
+										if(ctg==100){
+											cl="' . $geojson['colorOuter'] . '";
+											wg = 0.5;
+										}else{
+											cl="' . $geojson['color'] . '";
+											wg = "' . $geojson['weight'] . '"
+										}
 									';
-					}
-				}
-			}
+							$geojson_output .= '
+										return {
+											fillOpacity: ' . $geojson['fillOpacity'] . ',
+											fillColor : fillColor[ctg-1],
+											dashArray: "30 8",	
+											lineCap : "square",
+											weight : wg,
+											"color": cl,
+											"opacity": ' . $geojson['opacity'] . '
+										}}}).addTo(map)}
+										';
 		}
+
+		foreach ($geojson['file']['polygon'] as $e){
+			$geojson_output .='
+			AddPolygon('.$e.')
+			';
+		}
+
 		array_push($this->geojson, $geojson_output);
 	}
 
@@ -371,7 +368,7 @@ class Leaflet
 		$this->output_js .= '
 			<script type="text/javascript">';
 		$this->output_js .= '
-			$(document).ready(function() {' . $this->output_js_contents . '}}).addTo(map)})})';
+			$(document).ready(function() {' . $this->output_js_contents . '})';
 		$this->output_js .= '
 			</script>';
 

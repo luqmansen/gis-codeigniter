@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="test">
 	<h2>Menu</h2>
 	<div class="list-group">
-		<a href="#" class="list-group-item active">Upload GeoJson</a>
+		<a href="<?=base_url()?>crud/new_geo/" class="list-group-item active">Upload GeoJson</a>
 	</div>
 
 </div>
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>GIS Application</h1>
+			<h1>Sistem Pemetaan Wilayah</h1>
 
 		</div>
 	</div>
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/js/BootSideMenu.js"></script>
-<script src="<?=base_url()?>assets/js/MarkerClusterGroup.js"></script>
+<!--<script src="--><?//=base_url()?><!--assets/js/MarkerClusterGroup.js"></script>-->
 <script type="text/javascript">
 	var base_url = "<?=base_url()?>"
 	$('#test').BootSideMenu({side:"left", autoClose:false});

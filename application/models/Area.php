@@ -9,4 +9,8 @@ class Area extends CI_Model
 		return $q->result();
 	}
 
+	function insert_data($data, $table){
+		$this->db->insert($table, $data);
+	}
+
 }

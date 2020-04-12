@@ -132,7 +132,6 @@ class Leaflet
 		$geojson_output .= '
 		
 			function AddPolygon(data) {
-					console.log(data)
 					L.geoJson(data, {
 						style: function (feature){';
 

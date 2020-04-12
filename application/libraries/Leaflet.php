@@ -15,10 +15,11 @@
 class Leaflet
 {
 	protected $ci;
-	var $tileLayer = "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+	var $tileLayer = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=";
 	var $attribution = '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>';
+	var $map_type = 'mapbox/satellite-v9';
 
-	// Map State Options
+// Map State Options
 	var $center = "-0.959, 100.39716";
 	var $zoom = "13";
 	var $layers = "";
@@ -91,6 +92,7 @@ class Leaflet
 	public function __construct()
 	{
 		$this->ci =& get_instance();
+		$this->tileLayer .= getenv('mapbox_api_key');
 	}
 
 	function leaflet($config = array())
@@ -330,7 +332,7 @@ class Leaflet
 		$this->output_js_contents .= '
 			L.tileLayer("' . $this->tileLayer . '", {';
 
-		$this->output_js_contents .= "attribution: '$this->attribution'";
+		$this->output_js_contents .= "id: '$this->map_type'";
 
 		$this->output_js_contents .= '
 			}).addTo(map)

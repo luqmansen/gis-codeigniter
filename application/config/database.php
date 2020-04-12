@@ -73,12 +73,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$url = parse_url(getenv('db_url'));
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'database',
-	'username' => 'root',
-	'password' => 'password',
-	'database' => 'ci-gis',
+	'hostname' => $url["host"],
+	'username' => $url["user"],
+	'password' => $url["pass"],
+	'database' => substr($url["path"], 1),
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

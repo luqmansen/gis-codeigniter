@@ -32,7 +32,7 @@ class Crud extends CI_Controller
 		);
 
 		$this->area->insert_data($data,'area');
-		redirect('/');
+		redirect('/home');
 
 	}
 }

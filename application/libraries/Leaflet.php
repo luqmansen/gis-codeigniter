@@ -130,11 +130,13 @@ class Leaflet
 				$geojson[$key] = $value;
 			}
 		}
-
 		$geojson_output .= '
 		
 			function AddPolygon(data) {
-					L.geoJson(data, {
+					var geojson = JSON.parse(data["geojson_data"]);
+					var area_name = data[\'area_name\']
+					
+					L.geoJson(geojson, {
 						style: function (feature){';
 
 						if ($geojson['customCategory'] == TRUE) {
@@ -159,14 +161,25 @@ class Leaflet
 											weight : wg,
 											"color": cl,
 											"opacity": ' . $geojson['opacity'] . '
-										}}}).addTo(map)}
+										}},
 										';
+							$geojson_output .='
+								onEachFeature : function (data, layer) {
+									var info = "<p>"+  area_name + "</p><br>"
+									info += "<img class=\'ppcont\' src=\'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500\'>"
+									layer.bindPopup(info);
+									layer.on(\'click\', function () {
+										layer.openPopup()
+									})
+								}}).addTo(map)}
+								';
 		}
 
 		foreach ($geojson['file']['polygon'] as $e){
 			$geojson_output .='
-			AddPolygon('.$e.')
+			AddPolygon('.json_encode($e).');
 			';
+			print_r(json_encode($e));
 		}
 
 		array_push($this->geojson, $geojson_output);

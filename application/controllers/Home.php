@@ -26,8 +26,10 @@ class Home extends CI_Controller {
 
 		$polygon = array();
 		$area = $this->area->get_area();
+
 		foreach ($area as $a) {
-			$polygon[$a->area_name] = $a->geojson_data;
+			$photo =
+			array_push($polygon, $a);
 		}
 
 

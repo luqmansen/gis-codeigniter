@@ -17,7 +17,10 @@ class Crud extends CI_Controller
 	}
 
 	function new_geo(){
-		$this->load->view('v_upload_geo');
+		$this->load->view('management/v_upload_geo');
+	}
+	function new_photo(){
+		$this->load->view('management/v_upload_photo');
 	}
 
 	function add_geo(){
@@ -27,11 +30,26 @@ class Crud extends CI_Controller
 
 		$data = array(
 			'area_name'  => $this->input->post('area_name'),
-			'area_code' => $this->input->post('area_code'),
+			'id_category' => $this->input->post('area_code'),
 			'geojson_data' => $geojson_data,
 		);
 
 		$this->area->insert_data($data,'area');
+		redirect('/home');
+
+	}
+
+	function add_photo(){
+
+		$location = $_FILES['photo_data']['tmp_name'];
+		$photo_data  = file_get_contents($location);
+
+		$data = array(
+			'area_id'  => $this->input->post('area_id'),
+			'photo' => $photo_data,
+		);
+
+		$this->area->insert_data($data,'photo');
 		redirect('/home');
 
 	}

@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			padding:5px;
 			margin-bottom: 5px;
 		}
+		.ppcont{width:200px;}
 		#map { height: 500px; }
 	</style>
 </head>
@@ -31,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h2>Menu</h2>
 	<div class="list-group">
 		<a href="<?=base_url()?>crud/new_geo/" class="list-group-item active">Upload GeoJson</a>
+		<a href="<?=base_url()?>crud/new_photo/" class="list-group-item active">Upload Photo</a>
 	</div>
 
 </div>
@@ -45,21 +47,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 		<div class="col-md-12">
 			<?php echo $map['html']; ?>
-			<?php echo $map['js']; ?>
-
 		</div>
 	</div>
 
 
 
 </div>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="<?=base_url()?>assets/js/BootSideMenu.js"></script>
-<!--<script src="--><?//=base_url()?><!--assets/js/MarkerClusterGroup.js"></script>-->
+<script src="http://localhost/assets/js/BootSideMenu.js"></script>
 <script type="text/javascript">
 	var base_url = "<?=base_url()?>"
 	$('#test').BootSideMenu({side:"left", autoClose:false});
 </script>
+<?php echo $map['js']; ?>
 </body>
 </html>

@@ -7,6 +7,7 @@ class Crud extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('area');
+		$this->load->model('photo');
 		$this->load->helper('url');
 		$this->load->library('upload');
 
@@ -44,12 +45,14 @@ class Crud extends CI_Controller
 		$location = $_FILES['photo_data']['tmp_name'];
 		$photo_data  = file_get_contents($location);
 
+		$encoded = base64_encode($photo_data);
+
 		$data = array(
 			'area_id'  => $this->input->post('area_id'),
-			'photo' => $photo_data,
+			'photo_data' => $encoded,
 		);
 
-		$this->area->insert_data($data,'photo');
+		$this->photo->insert_data($data,'photo');
 		redirect('/home');
 
 	}

@@ -14,7 +14,8 @@ class Migration_add_category_photo_admin extends CI_Migration {
 			),
 			'category_name' => array(
 				'type' => 'VARCHAR',
-				'constraint' => '100'
+				'constraint' => '100',
+				'unique' => TRUE
 			),
 			'color' => array(
 				'type' => 'VARCHAR',
@@ -82,7 +83,7 @@ class Migration_add_category_photo_admin extends CI_Migration {
 				'type' => 'LONGBLOB',
 			)
 		));
-		$this->dbforge->add_field('CONSTRAINT FOREIGN KEY (id) REFERENCES area(id)');
+		$this->dbforge->add_field('CONSTRAINT FOREIGN KEY (area_id) REFERENCES area(id)');
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('photo');
 	}

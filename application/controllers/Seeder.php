@@ -11,23 +11,29 @@ class Seeder extends CI_Controller
 
 	function index()
 	{
-		try {
-			$data = array(
+
+		$data = array(
+			array(
 				'category_name' => 'Pemukiman',
 				'color' => '#d8f70a',
-			);
-			$this->category->insert_data($data,'category');
-			$data = array(
+			),
+			array(
 				'category_name' => 'Persawahan',
 				'color' => '#00ff26',
-			);
-			$this->category->insert_data($data,'category');
+			)
+		);
+
+		if (! $this->db->insert_batch('category', $data)){
+			if (getenv("ENV") != 'production'){
+				echo json_encode($this->db->error());
+			} else {
+				echo "Seed Failed";
+			}
+		} else {
 
 			echo "Seed success";
-		} catch (Exception $e) {
-
-			echo 'Seed Failed: ',  $e->getMessage(), "\n";
 		}
+
 
 	}
 }

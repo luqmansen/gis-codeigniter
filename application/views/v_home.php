@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="http://localhost/assets/js/BootSideMenu.js"></script>
+<script src="<?=base_url()?>/assets/js/BootSideMenu.js"></script>
 <script type="text/javascript">
 	var base_url = "<?=base_url()?>"
 	$('#test').BootSideMenu({side:"left", autoClose:false});

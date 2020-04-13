@@ -3,8 +3,13 @@
 
 class Migrate extends CI_Controller
 {
-	public function index(){
+	public function __construct()
+	{
+		parent::__construct();
 		$this->load->library('migration');
+	}
+
+	public function index(){
 
 		if (!$this->migration->current())
 		{

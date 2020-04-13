@@ -57,7 +57,7 @@ $config['migration_table'] = 'migrations';
 | in your code to have the latest migration.
 |
 */
-$config['migration_auto_latest'] = TRUE;
+$config['migration_auto_latest'] = getenv('ENABLE_MIGRATION');
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ $config['migration_auto_latest'] = TRUE;
 | be upgraded / downgraded to.
 |
 */
-$config['migration_version'] = 001;
+$config['migration_version'] = getenv('MIGRATION_VERSION');
 
 /*
 |--------------------------------------------------------------------------

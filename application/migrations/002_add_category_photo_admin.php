@@ -66,7 +66,7 @@ class Migration_add_category_photo_admin extends CI_Migration {
 		);
 		$this->dbforge->add_column('area', $area_new_fields);
 		$this->dbforge->add_column('area',[
-			'CONSTRAINT fk_id FOREIGN KEY(id) REFERENCES category(id)',
+			'CONSTRAINT fk_id FOREIGN KEY(id_category) REFERENCES category(id)',
 		]);
 
 		// PHOTO TABLE

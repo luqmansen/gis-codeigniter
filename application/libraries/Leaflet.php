@@ -135,6 +135,7 @@ class Leaflet
 			function AddPolygon(data) {
 					var geojson = JSON.parse(data["geojson_data"]);
 					var area_name = data[\'area_name\']
+					var image = data[\'photo\'][0]
 					
 					L.geoJson(geojson, {
 						style: function (feature){';
@@ -166,7 +167,11 @@ class Leaflet
 							$geojson_output .='
 								onEachFeature : function (data, layer) {
 									var info = "<p>"+  area_name + "</p><br>"
-									info += "<img class=\'ppcont\' src=\'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500\'>"
+									var img = "data:image/png;base64,"
+									img +=  image[\'photo_data\']
+									info += "<img src="
+									info += img 
+									info += " class=\'ppcont\'>"
 									layer.bindPopup(info);
 									layer.on(\'click\', function () {
 										layer.openPopup()
@@ -179,7 +184,6 @@ class Leaflet
 			$geojson_output .='
 			AddPolygon('.json_encode($e).');
 			';
-			print_r(json_encode($e));
 		}
 
 		array_push($this->geojson, $geojson_output);

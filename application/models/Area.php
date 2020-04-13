@@ -1,6 +1,6 @@
 <?php
 
-require(APPPATH.'models/BaseModel.php');
+require_once(APPPATH.'models/BaseModel.php');
 class Area extends BaseModel
 {
 	public function get_area(){

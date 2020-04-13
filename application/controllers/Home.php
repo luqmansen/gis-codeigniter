@@ -1,13 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('leaflet');
 		$this->load->model('area');
+		$this->load->model('photo');
 	}
 
 	public function index()
@@ -28,8 +30,11 @@ class Home extends CI_Controller {
 		$area = $this->area->get_area();
 
 		foreach ($area as $a) {
-			$photo =
-			array_push($polygon, $a);
+			$photo = $this->photo->get_photo_by_area($a->id);
+			$temp = (array)$a;
+			$temp['photo'] = $photo;
+			$obj = (object)$temp;
+			array_push($polygon, $obj);
 		}
 
 

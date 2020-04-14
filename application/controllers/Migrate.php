@@ -15,7 +15,7 @@ class Migrate extends CI_Controller
 		{
 			echo 'Error' .$this->migration->error_string();
 		} else{
-			echo "Migration success";
+			echo "Migration " . getenv("MIGRATION_VERSION") . " success";
 		}
 
 	}

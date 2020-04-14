@@ -49,7 +49,8 @@ class Migration_add_category_photo_admin extends CI_Migration {
 		$fields = array(
 			'area_id' => array(
 				'name' => 'id',
-				'type' => 'INT'
+				'type' => 'INT',
+				'auto_increment' => TRUE,
 			),
 		);
 		$this->dbforge->modify_column('area', $fields);

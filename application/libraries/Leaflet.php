@@ -137,6 +137,7 @@ class Leaflet
 					var area_name = data[\'area_name\']
 					var image = data[\'photo\'][0]
 					var category_name = data[\'category_name\']
+					var description = data[\'area_description\']
 					var color = data[\'color\']
 					
 					L.geoJson(geojson, {
@@ -157,13 +158,16 @@ class Leaflet
 										';
 							$geojson_output .='
 								onEachFeature : function (data, layer) {
-									var info = "<p>"+  area_name + "</p>"
-									info += "<p>type: "+ category_name  + "</p>"
-									var img = "data:image/png;base64,"
-									img +=  image[\'photo_data\']
-									info += "<img src="
-									info += img 
-									info += " class=\'ppcont\'>"
+									var info = "<p><b>"+  area_name + "</b></p>"
+									info += "<p><b>Type</b>: <br>"+ category_name  + "</p>"
+									info += "<p><b>Description</b>:<br> "+ description  + "</p>"
+									if (image != undefined){
+										var img = "data:image/png;base64,"
+										img +=  image[\'photo_data\']
+										info += "<img src="
+										info += img 
+										info += " class=\'ppcont\'>"										
+									}
 									layer.bindPopup(info);
 									layer.on(\'click\', function () {
 										layer.openPopup()

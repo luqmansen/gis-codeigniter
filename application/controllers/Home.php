@@ -28,12 +28,11 @@ class Home extends CI_Controller
 		);
 
 		$polygon = array();
-		$area = $this->area->get_area();
+		$area = $this->area->get_all();
 
 		foreach ($area as $a) {
-			$photo = $this->photo->get_photo_by_area($a->id);
-			$category = $this->category->get_category_by_id($a->id_category);
-
+			$photo = $this->photo->get_photo_by_area_id($a->id);
+			$category = $this->category->get_row_by_id($a->id_category);
 			$temp = (array)$a;
 			$temp['photo'] = $photo;
 			$temp['color'] = $category->color;

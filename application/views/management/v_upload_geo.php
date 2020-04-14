@@ -8,34 +8,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="UTF-8">
 	<title>Upload GeoJson</title>
+	<link href="<?= base_url() ?>assets/css/uploadPhoto.css" rel="stylesheet">
+	<style>
+		td {
+			text-align: left
+		}
+	</style>
 </head>
 <body>
-<div style="text-align: center;">
-	<h1>Upload GeoJSON file</h1>
-	<h3>Tambah data baru</h3>
-</div>
 
-<form action="<?php echo base_url(). 'crud/add_geo'; ?>" method="post" enctype="multipart/form-data">
-	<table style="margin:20px auto;">
-		<tr>
-			<td>Area Name</td>
-			<td><input type="text" name="area_name"></td>
-		</tr>
-		<tr>
-			<td>Area Code</td>
-			<td><input type="text" name="area_code"></td>
-		</tr>
-		<tr>
-			<td>GeoJSON File</td>
-			<td><input type="file" name="geojson_data" id="geojson_data"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit"></td>
-		</tr>
-	</table>
+<h2>Upload GeoJSON</h2>
+<form action="<?php echo base_url() . 'crud/add_geo'; ?>" method="post" enctype="multipart/form-data">
+	<fieldset>
+		<table>
+			<tr>
+				<td><label for="area_name">Name:</label></
+				>
+				<td><input style="width: 211px" type="text" name="area_name"></td>
+			</tr>
+			<tr>
+				<td><label for="id_category">Category:</label></td>
+				<td><select name="id_category" style="width: 211px">
+						<?php
+						foreach ($category as $e) {
+							echo '<option value="' . $e->id . '">' . $e->category_name . '</option>';
+						}
+						?>
+					</select></td>
+			</tr>
+			<tr>
+				<td><label for="area_description">Description:</label></td>
+				<td><textarea type="text" name="area_description"></textarea></td>
+			</tr>
+			<tr>
+				<td><label for="geojson_data">GeoJSON File:</label></td>
+				<td><input class="inputfile" type="file" name="geojson_data"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Submit"></td>
+			</tr>
+		</table>
+	</fieldset>
 </form>
-
 </body>
 </html>
 

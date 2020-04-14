@@ -54,8 +54,9 @@ class Crud extends CI_Controller
 
 		$data = array(
 			'area_name' => $this->input->post('area_name'),
+			'area_description' => $this->input->post('area_name'),
 			'id_category' => $this->input->post('id_category'),
-			'geojson_data' => $geojson_data,
+			'geojson_data' => $geojson_data
 		);
 
 		$this->area->insert_data($data,'area');

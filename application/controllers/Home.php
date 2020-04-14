@@ -10,6 +10,7 @@ class Home extends CI_Controller
 		$this->load->library('leaflet');
 		$this->load->model('area');
 		$this->load->model('photo');
+		$this->load->model('category');
 	}
 
 	public function index()
@@ -31,8 +32,13 @@ class Home extends CI_Controller
 
 		foreach ($area as $a) {
 			$photo = $this->photo->get_photo_by_area($a->id);
+			$category = $this->category->get_category_by_id($a->id_category);
+
 			$temp = (array)$a;
 			$temp['photo'] = $photo;
+			$temp['color'] = $category->color;
+			$temp['category_name'] = $category->category_name;
+
 			$obj = (object)$temp;
 			array_push($polygon, $obj);
 		}

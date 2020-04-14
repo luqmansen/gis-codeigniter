@@ -136,37 +136,29 @@ class Leaflet
 					var geojson = JSON.parse(data["geojson_data"]);
 					var area_name = data[\'area_name\']
 					var image = data[\'photo\'][0]
+					var category_name = data[\'category_name\']
+					var color = data[\'color\']
 					
 					L.geoJson(geojson, {
 						style: function (feature){';
 
 						if ($geojson['customCategory'] == TRUE) {
-							$geojson_output .= '									
-										var ctg = feature.properties.kategori;
-										var fillColor = ' . json_encode($geojson['categories']). '
-										var cl, wg;
-										if(ctg==100){
-											cl="' . $geojson['colorOuter'] . '";
-											wg = 0.5;
-										}else{
-											cl="' . $geojson['color'] . '";
-											wg = "' . $geojson['weight'] . '"
-										}
-									';
+
 							$geojson_output .= '
 										return {
 											fillOpacity: ' . $geojson['fillOpacity'] . ',
-											fillColor : fillColor[ctg-1],
+											fillColor : color,
 											dashArray: "30 8",	
 											lineCap : "square",
-											weight : wg,
-											"color": cl,
+											weight : 0.5,
+											"color": color,
 											"opacity": ' . $geojson['opacity'] . '
 										}},
 										';
 							$geojson_output .='
 								onEachFeature : function (data, layer) {
-									var info = "<p>"+  area_name + "</p><br>"
+									var info = "<p>"+  area_name + "</p>"
+									info += "<p>type: "+ category_name  + "</p>"
 									var img = "data:image/png;base64,"
 									img +=  image[\'photo_data\']
 									info += "<img src="

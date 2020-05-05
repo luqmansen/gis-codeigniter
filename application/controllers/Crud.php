@@ -1,5 +1,8 @@
 <?php
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class Crud extends CI_Controller
 {
@@ -32,6 +35,63 @@ class Crud extends CI_Controller
 		}
 
 		$this->load->view('management/v_show_data', $data);
+	}
+
+	function export_category()
+	{
+		$spreadsheet = new Spreadsheet();
+		// EXPORT CATEGORY ON SHEET 0
+		$sheet = $spreadsheet->setActiveSheetIndex(0);
+		$sheet->setCellValue('A1', 'id'); 
+        $sheet->setCellValue('B1', 'category_name');
+		$sheet->setCellValue('C1', 'color');
+
+		$category = $this->category->get_all();
+		$i = 2; foreach ($category as $cat){
+			$sheet->setCellValue('A'.$i, $cat->id);
+			$sheet->setCellValue('B'.$i, $cat->category_name);
+			$sheet->setCellValue('C'.$i, $cat->color);
+		}
+
+		// EXPORT AREA ON SHEET 1
+		$spreadsheet->createSheet();
+		$sheet = $spreadsheet->setActiveSheetIndex(1);
+		$sheet->setCellValue('A1', 'id'); 
+        $sheet->setCellValue('B1', 'name');
+		$sheet->setCellValue('C1', 'description');
+		$sheet->setCellValue('D1', 'data');
+
+		$area = $this->area->get_all();
+		$i = 2; foreach ($area as $a){
+			$sheet->setCellValue('A'.$i, $a->id);
+			$sheet->setCellValue('B'.$i, $a->area_name);
+			$sheet->setCellValue('C'.$i, $a->area_description);
+			$sheet->setCellValue('D'.$i, $a->geojson_data);
+		}
+
+
+		// EXPORT PHOTO ON SHEET 1
+		$spreadsheet->createSheet();
+		$sheet = $spreadsheet->setActiveSheetIndex(2);
+		$sheet->setCellValue('A1', 'id'); 
+        $sheet->setCellValue('B1', 'area_id');
+		$sheet->setCellValue('C1', 'photo');
+
+		$photo = $this->photo->get_all();
+		$i = 2; foreach ($photo as $a){
+			$sheet->setCellValue('A'.$i, $a->id);
+			$sheet->setCellValue('B'.$i, $a->area_id);
+			$sheet->setCellValue('C'.$i, $a->photo_data);
+		}
+		
+		$filename = 'exported_data'; // set filename for excel file to be exported
+ 
+        header('Content-Type: application/vnd.ms-excel'); // generate excel file
+        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Cache-Control: max-age=0');
+		$writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+
 	}
 
 	function new_geo()

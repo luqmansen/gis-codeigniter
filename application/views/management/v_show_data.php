@@ -75,7 +75,6 @@
 		<?php endforeach; ?>
 		</tbody>
 	</table>
-
 	<h1>Data <small>Photo</small></h1>
 	<table class="table table-bordered table-striped" id="photo">
 		<thead>
@@ -97,7 +96,9 @@
 		<?php endforeach; ?>
 		</tbody>
 	</table>
+	<h4> <a href="<?= base_url() ?>crud/export_category/">Download Data</h4>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
